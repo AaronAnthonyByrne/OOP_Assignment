@@ -1,16 +1,17 @@
 void setup()
 {
-  size(500,500);
+  size(640, 360);
   background(0);
   target =20;
-  border = width * 0.1f;
+  
 }
+
 float border;
 float target;
 
 void draw()
 {
-  background(0);
+ background(0);
   stroke(255,0,0);
   fill(255,0,0);
   //draw the line from the y axis
@@ -22,6 +23,7 @@ void draw()
   ellipse(mouseX,mouseY,target,target);
   //Text for the circle.
   text("You are aiming at",mouseX+target,mouseY);
+   grid();
   //messing with rectangles
   rectMode(RADIUS);  // Set rectMode to RADIUS
   fill(255);  // Set fill to white
@@ -32,4 +34,21 @@ void draw()
   rect(50, 50, 30, 30);
   
   
+}
+
+void grid()
+{
+ int gridSize = 40;
+
+  for (int x = gridSize; x <= width - gridSize; x += gridSize)
+    {
+      for (int y = gridSize; y <= height - gridSize; y += gridSize) 
+      {
+          noStroke();
+          fill(255);
+          rect(x-1, y-1, 3, 3);
+          stroke(255, 100);
+          line(x, y, width/2, height/2);  
+      }
+    }
 }
