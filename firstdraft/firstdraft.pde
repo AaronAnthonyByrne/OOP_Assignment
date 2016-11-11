@@ -32,19 +32,8 @@ void loadData()
 void draw()
 {
  background(0);
-  loadScreen();
-// menu();
- /*
-  //messing with rectangles
-  rectMode(RADIUS);  // Set rectMode to RADIUS
-  fill(255);  // Set fill to white
-  rect(50, 50, 30, 30);  // Draw white rect using RADIUS mode
-  
-  rectMode(CENTER);  // Set rectMode to CENTER
-  fill(100);  // Set fill to gray
-  rect(50, 50, 30, 30);
-  */
-  
+  //loadScreen();
+  drawSquares();
 }
 void loadScreen()
 {
@@ -108,4 +97,27 @@ void grid()
           line(x, y, width/2, height/2);  
       }
     }
+}
+
+void  drawSqaure()
+{
+  for (int i = 0; i < but.size(); i++) 
+    {
+
+      float plotx = map(but.get(i).Xg, -5, 5, border, width-border);
+      float ploty = map(but.get(i).Yg, -5, 5, border, height-border);
+
+      stroke(0, 255, 255);
+      line(plotx, ploty+2, plotx, ploty-2);
+      line(plotx+2, ploty, plotx-2, ploty);
+
+      noFill();
+      stroke(255, 0, 0);
+      ellipse(plotx, ploty, star.get(i).AbsMag, star.get(i).AbsMag);
+
+      fill(255);
+      textAlign(LEFT, CENTER);
+      text(star.get(i).DisplayName, plotx+10, ploty-2);
+
+  
 }
