@@ -2,6 +2,7 @@ void setup()
 {
   size(640, 360);
   background(0);
+  loadData();
   target =20;
   
 }
@@ -10,11 +11,29 @@ float border;
 float target;
 char letter;
 String words = "Your name is?";
+ArrayList<Button> but = new ArrayList<Button>();
+
+
+void loadData()
+{
+  but.clear();
+
+  Table t = loadTable("buttondata.csv");
+  
+  for (int i = 0; i < t.getRowCount(); i ++)
+  {
+    TableRow row = t.getRow(i);
+    Button r = new Button(row);
+    but.add(r);
+  }
+ 
+}
 
 void draw()
 {
  background(0);
- menu();
+  loadScreen();
+// menu();
  /*
   //messing with rectangles
   rectMode(RADIUS);  // Set rectMode to RADIUS
@@ -27,34 +46,39 @@ void draw()
   */
   
 }
-
-void menu()
+void loadScreen()
 {
-    textSize(36);
-    text(words, 50, 120, 540, 300);
-  
-  
-}
-
-void keyTyped() {
-  // The variable "key" always contains the value 
-  // of the most recent key pressed.
-  if ((key >= 'A' && key <= 'z') || key == ' ')
+  for (int j=0;j<100;j++)
   {
-    letter = key;
-    words = words + key;
-    // Write the letter to the console
-    println(key);
+    background(102);
+    pushMatrix();
+    translate(width*0.2, height*0.5);
+    rotate(frameCount / 200.0);
+    star(10, 0, 50, 140, 20); 
+    popMatrix();
   }
-   else if (key == 0)
-  {
-    targetSystem();
-   }
   
+  targetSystem();
+}
+void star(float x, float y, float radius1, float radius2, int number_points) {
+  float angle = TWO_PI / number_points;
+  float halfAngle = angle/2.0;
+  beginShape();
+  for (float a = 0; a < TWO_PI; a += angle) 
+  {
+    float sx = x + cos(a) * radius2;
+    float sy = y + sin(a) * radius2;
+    vertex(sx, sy);
+    sx = x + cos(a+halfAngle) * radius1;
+    sy = y + sin(a+halfAngle) * radius1;
+    vertex(sx, sy);
+  }
+  endShape(CLOSE);
 }
 
 void targetSystem()
 {
+  background(0);
  stroke(255,0,0);
   fill(255,0,0);
   //draw the line from the y axis
