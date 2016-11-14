@@ -9,9 +9,12 @@ void setup()
   textFont(smallerFont, 22);
 }
 
+Map [] sq = new Map[26];
 int hudState=0;
 float mapBorder= 150;
 float border =10;
+boolean overBox = false;
+boolean locked = false;
 PFont myFont, smallerFont;
 Digger digger;
 
@@ -77,18 +80,30 @@ void gameOver()
 
 void digMap()
 {
+  //gives me a 5x5 grid
+  float x = mapBorder; // distance away from left of screen
+  float y = border;  // distance from top of screen
+  int b=0;
+  for (int i = 0; i < 5; i += 1)
+  { 
+    for (int j = 0; j < 5; j += 1) 
+    { 
 
-  for (float x = 0; x<=5; x++)
-  {
-    float lx = map(x, 0, 5, mapBorder, width-border);
-    line(lx, border, lx, height-border);
+      sq[b] = new Map(x+i*53, y+j*53, 50, 50, 50);
+      b++;
+    }
   }
-  for (float y = 0; y<=5; y++)
+
+
+  for (int i = 0; i < 25; i++) 
   {
-    float ly = map(y, 0, 5, border, height-border);
-    line(mapBorder, ly, width-border, ly);
+    sq[i].display();
   }
 }
+
+
+
+
 
 void draw()
 {
