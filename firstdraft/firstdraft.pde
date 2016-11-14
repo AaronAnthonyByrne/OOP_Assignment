@@ -2,10 +2,10 @@ void setup()
 {
   size(640, 360);
   background(0);
-
+  frameRate(40);
   target =20;
 }
-
+int count = frameCount;
 float border;
 float target;
 char letter;
@@ -13,22 +13,26 @@ String words = "Your name is?";
 
 void draw()
 {
-  background(0);
   loadScreen();
   //drawSquares();
+  println(frameCount);
 }
 void loadScreen()
 {
-    background(102);
+  if (frameCount<1100)
+  {
     pushMatrix();
-    translate(width*0.2, height*0.5);
+    translate(width*0.5, height *0.25);
     rotate(frameCount / 200.0);
-    fill(50,205,50);
+    fill(50, 205, 50);
     star(120, 100, 30, 100, 20); 
     popMatrix();
+  } 
+  else
+  {
+    targetSystem();
   }
-
- // targetSystem();
+}
 
 void star(float x, float y, float radius1, float radius2, int number_points) {
   float angle = TWO_PI / number_points;
