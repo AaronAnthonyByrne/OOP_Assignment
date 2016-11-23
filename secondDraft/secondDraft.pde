@@ -7,6 +7,7 @@ void setup()
   textFont(myFont, 48); 
   smallerFont =loadFont("AgencyFB-Reg-22.vlw");
   textFont(smallerFont, 22);
+  frameRate(40);
 }
 
 Map [] sq = new Map[26];
@@ -17,6 +18,8 @@ boolean overBox = false;
 boolean locked = false;
 PFont myFont, smallerFont;
 Digger digger;
+int count = frameCount;
+int targetCount = 1100;
 
 void menu()
 {
@@ -100,29 +103,57 @@ void digMap()
     sq[i].display();
   }
 }
+void loadScreen()
+{
+  if (frameCount<1100)
+  {
+    pushMatrix();
+    translate(width*0.5, height *0.25);
+    rotate(frameCount / 200.0);
+    fill(50, 205, 50);
+    star(120, 100, 30, 100, 20); 
+    popMatrix();
+  } else
+  {
+    switch (hudState)
+    {
+    case 0:
+      menu();
+      break;
+    case 1:
+      dig();
+      break;
+    case 2:
+      craft();
+      break;
+    case 3:
+      buyAndSell();
+      break;
+    case 4:
+      gameOver();
+      break;
+    }
+  }
+}
 
-
-
-
+void star(float x, float y, float radius1, float radius2, int number_points) 
+{
+  float angle = TWO_PI / number_points;
+  float halfAngle = angle/2.0;
+  beginShape();
+  for (float a = 0; a < TWO_PI; a += angle) 
+  {
+    float sx = x + cos(a) * radius2;
+    float sy = y + sin(a) * radius2;
+    vertex(sx, sy);
+    sx = x + cos(a+halfAngle) * radius1;
+    sy = y + sin(a+halfAngle) * radius1;
+    vertex(sx, sy);
+  }
+  endShape(CLOSE);
+}
 
 void draw()
 {
-  switch (hudState)
-  {
-  case 0:
-    menu();
-    break;
-  case 1:
-    dig();
-    break;
-  case 2:
-    craft();
-    break;
-  case 3:
-    buyAndSell();
-    break;
-  case 4:
-    gameOver();
-    break;
-  }
+  loadScreen();
 }
