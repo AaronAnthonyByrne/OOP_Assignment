@@ -4,8 +4,8 @@ class DigData
   String drillType;
   String oreType;
   float money;
-  float distanceX;
-  float distanceY;
+  PVector position;
+  PVector mapPos;
 
 
   DigData(TableRow row)
@@ -14,16 +14,24 @@ class DigData
     drillType=row.getString("drillType");
     oreType=row.getString("ore");
     money = row.getFloat("money");
-    distanceX = row.getFloat("disX");
-    distanceY = row.getFloat("disY");
+    position = new PVector(
+    row.getFloat("disX")
+    ,row.getFloat("disY")
+    );
+    mapPos = new PVector(
+    map(position.x, 1, 5, mapBorder, width-mapBorder)
+    ,map(position.y, 1, 5, border, height-border)
+    );
   }
+
   String toString()
   {
     return drilled
-      +" " +drillType
-      +" " +oreType
-      +" " +money
-      +" " +distanceX
-      +" " +distanceY;
+      + "," + drillType
+      + "," + oreType
+      + "," + money
+      + "," +  position
+
+      ;
   }
 }

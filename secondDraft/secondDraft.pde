@@ -1,59 +1,59 @@
 
 void setup()
 {
-  size(640, 320);
+  size(640, 400);
   //declaring new instances of the class
   digger = new Digger(50, 50, 0);
-
+  map = new Map();
   //calling on specific fonts
   fill(255);
   myFont =loadFont("AgencyFB-Bold-48.vlw");
   textFont(myFont, 48); 
   smallerFont =loadFont("AgencyFB-Reg-22.vlw");
   textFont(smallerFont, 22);
+  digFont=loadFont("BodoniMTCondensed-Italic-12.vlw");
+  textFont(digFont,12);
 
   //using the framerate to contrl the loading screen
   frameRate(40);
 
   //colour of the background
   background(0);
-  
+
   //methods to call in setup
   loadData();
   printData();
 }
 //Fonts for use in HUD
-PFont myFont, smallerFont;
+PFont myFont, smallerFont,digFont;
 
 //variables in use
 int hudState=0;
+float mapBorder= 150;
+float border =10;
 
 int count = frameCount;
 int targetCount = 150;
 
 //Class variables
 Digger digger;
-Map map;
-ArrayList<DigData> digSpot = new ArrayList<DigData>();
 
+ArrayList<DigData> digSpot = new ArrayList<DigData>();
+Map map;
 void loadData()
 {
-  digSpot.clear();
-
-  Table t = loadTable("data.csv","header");
-  for (int i = 0; i < t.getRowCount(); i ++)
+  Table t = loadTable("data.csv", "header");
+  for (TableRow row : t.rows())
   {
-    TableRow row = t.getRow(i);
     DigData insert = new DigData(row);
     digSpot.add(insert);
   }
-  
 }
 void printData()
 {
-  for (DigData d : digSpot)
+  for (DigData insert : digSpot)
   {
-    println(d);
+    println(insert);
   }
 }
 
@@ -93,11 +93,12 @@ void menu()
 void dig()
 {
   background(0);
-  text("Welcome DIG", 30, 50);
+  textFont(smallerFont);
+  text("Dig Map", 30, 50);
 
   digger.render();
   map.display();
-  //map.plotDigSpots();
+ 
 }
 
 
