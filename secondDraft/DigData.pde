@@ -7,25 +7,15 @@ class DigData
   float distanceX;
   float distanceY;
 
-  DigData(String line)
-  {
-    String[] fields = line.split(",");
-    drilled= fields[0];
-    drillType=fields[1];
-    oreType=fields[2];
-    money = Float.parseFloat(fields[3]);
-    distanceX = Float.parseFloat(fields[4]);
-    distanceY = Float.parseFloat(fields[5]);
-  }
 
   DigData(TableRow row)
   {
-    drilled= row.getString(0);
-    drillType=row.getString(1);
-    oreType=row.getString(2);
-    money = row.getFloat(3);
-    distanceX = row.getFloat(4);
-    distanceY = row.getFloat(5);
+    drilled= row.getString("drilled");
+    drillType=row.getString("drillType");
+    oreType=row.getString("ore");
+    money = row.getFloat("money");
+    distanceX = row.getFloat("disX");
+    distanceY = row.getFloat("disY");
   }
   String toString()
   {

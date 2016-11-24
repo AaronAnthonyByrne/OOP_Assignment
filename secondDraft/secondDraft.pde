@@ -40,7 +40,7 @@ void loadData()
 {
   digSpot.clear();
 
-  Table t = loadTable("data.csv");
+  Table t = loadTable("data.csv","header");
   for (int i = 0; i < t.getRowCount(); i ++)
   {
     TableRow row = t.getRow(i);
