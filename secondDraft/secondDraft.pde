@@ -1,25 +1,37 @@
+
 void setup()
 {
   size(640, 320);
+  //declaring new instances of the class
   digger = new Digger(50, 50, 0);
+  map = new Map();
+
+  //calling on specific fonts
   fill(255);
   myFont =loadFont("AgencyFB-Bold-48.vlw");
   textFont(myFont, 48); 
   smallerFont =loadFont("AgencyFB-Reg-22.vlw");
   textFont(smallerFont, 22);
-  frameRate(40);
-}
 
-Map [] sq = new Map[26];
-int hudState=0;
-float mapBorder= 150;
-float border =10;
-boolean overBox = false;
-boolean locked = false;
+  //using the framerate to contrl the loading screen
+  frameRate(40);
+
+  //colour of the background
+  background(0);
+}
+//Fonts for use in HUD
 PFont myFont, smallerFont;
-Digger digger;
+
+//variables in use
+int hudState=0;
+
 int count = frameCount;
-int targetCount = 1100;
+int targetCount = 150;
+
+//Class variables
+Digger digger;
+Map map;
+
 
 void menu()
 {
@@ -53,6 +65,7 @@ void menu()
     hudState = 4;
   }
 }
+
 void dig()
 {
   background(0);
@@ -61,11 +74,19 @@ void dig()
   digger.render();
   digMap();
 }
+void digMap()
+{
+  map.display();
+  
+}
+
 
 void craft()
 {
   background(0);
-  text("Welcome Craft", 30, 50);
+  text("Crafting", 30, 50);
+  
+  
 }
 
 void buyAndSell()
@@ -81,37 +102,17 @@ void gameOver()
   exit();
 }
 
-void digMap()
-{
-  //gives me a 5x5 grid
-  float x = mapBorder; // distance away from left of screen
-  float y = border;  // distance from top of screen
-  int b=0;
-  for (int i = 0; i < 5; i += 1)
-  { 
-    for (int j = 0; j < 5; j += 1) 
-    { 
 
-      sq[b] = new Map(x+i*53, y+j*53, 50, 50, 50);
-      b++;
-    }
-  }
-
-
-  for (int i = 0; i < 25; i++) 
-  {
-    sq[i].display();
-  }
-}
 void loadScreen()
 {
-  if (frameCount<1100)
+
+  if (frameCount<targetCount)
   {
     pushMatrix();
     translate(width*0.5, height *0.25);
     rotate(frameCount / 200.0);
     fill(50, 205, 50);
-    star(120, 100, 30, 100, 20); 
+    star(120, 100, 30, 75, 20); 
     popMatrix();
   } else
   {

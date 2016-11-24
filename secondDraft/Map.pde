@@ -1,23 +1,23 @@
 class Map
 {
-  float x;
-  float y; 
-
-  float w=50;
-  float h=50; 
-
-  int col;
-
-  Map( float x, float y, float w, float h, int col ) 
+  float mapBorder= 150;
+  float border =10;
+  Map() 
   {
-    this.x=x;
-    this.y=y;
   } 
 
   void display() 
   {
-    stroke(0);
-    rect (x, y, w, h);
-    println (x);
+    for (float x = 0; x<=5; x++)
+    {
+      float lx = map(x, 0, 5, mapBorder, width-border);
+      line(lx, border, lx, height-border);
+    }
+    for (float y = 0; y<=5; y++)
+    {
+      float ly = map(y, 0, 5, border, height-border);
+      line(mapBorder, ly, width-border, ly);
+      
+    }
   }
 }
