@@ -4,7 +4,6 @@ void setup()
   size(640, 320);
   //declaring new instances of the class
   digger = new Digger(50, 50, 0);
-  map = new Map();
 
   //calling on specific fonts
   fill(255);
@@ -18,6 +17,10 @@ void setup()
 
   //colour of the background
   background(0);
+  
+  //methods to call in setup
+  loadData();
+  printData();
 }
 //Fonts for use in HUD
 PFont myFont, smallerFont;
@@ -31,7 +34,28 @@ int targetCount = 150;
 //Class variables
 Digger digger;
 Map map;
+ArrayList<DigData> digSpot = new ArrayList<DigData>();
 
+void loadData()
+{
+  digSpot.clear();
+
+  Table t = loadTable("data.csv");
+  for (int i = 0; i < t.getRowCount(); i ++)
+  {
+    TableRow row = t.getRow(i);
+    DigData insert = new DigData(row);
+    digSpot.add(insert);
+  }
+  
+}
+void printData()
+{
+  for (DigData d : digSpot)
+  {
+    println(d);
+  }
+}
 
 void menu()
 {
@@ -72,12 +96,8 @@ void dig()
   text("Welcome DIG", 30, 50);
 
   digger.render();
-  digMap();
-}
-void digMap()
-{
   map.display();
-  
+  //map.plotDigSpots();
 }
 
 
@@ -85,8 +105,6 @@ void craft()
 {
   background(0);
   text("Crafting", 30, 50);
-  
-  
 }
 
 void buyAndSell()

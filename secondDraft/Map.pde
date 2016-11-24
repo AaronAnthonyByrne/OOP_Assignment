@@ -17,7 +17,28 @@ class Map
     {
       float ly = map(y, 0, 5, border, height-border);
       line(mapBorder, ly, width-border, ly);
-      
     }
   }
+
+/*  void plotDigSpots()
+  {
+    for (int i = 0; i < digSpot.size(); i++) 
+    {
+
+      float plotx = map(digSpot.get(i).distanceX, 0, 5, mapBorder, width-border);
+      float ploty = map(digSpot.get(i).distanceY, 0, 5, border, height-border);
+
+      stroke(0, 255, 255);
+      line(plotx, ploty+2, plotx, ploty-2);
+      line(plotx+2, ploty, plotx-2, ploty);
+
+      noFill();
+      stroke(255, 0, 0);
+      ellipse(plotx, ploty, 5, 5);
+
+      fill(255);
+      textAlign(LEFT, CENTER);
+      text(digSpot.get(i).drillType, plotx+10, ploty-2);
+    }
+  }*/
 }
