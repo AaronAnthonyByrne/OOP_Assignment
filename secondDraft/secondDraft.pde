@@ -14,7 +14,7 @@ void setup()
   smallerFont =loadFont("AgencyFB-Reg-22.vlw");
   textFont(smallerFont, 22);
   digFont=loadFont("BodoniMTCondensed-Italic-12.vlw");
-  textFont(digFont,12);
+  textFont(digFont, 12);
 
   //using the framerate to contrl the loading screen
   frameRate(40);
@@ -27,21 +27,29 @@ void setup()
   printData();
 }
 //Fonts for use in HUD
-PFont myFont, smallerFont,digFont;
+PFont myFont, smallerFont, digFont;
 
 //variables in use
 int hudState=0;
 float mapBorder= 150;
 float border =10;
-
+float imageSize =150;
 int count = frameCount;
 int targetCount = 300;
-
+int choice = -1;
+float[] years = {1, 2, 3, 4, 5, 6};
+String[] yearC ={"2034", "2035", "2036", "2037", "2038", "2039"};
+Table table;
 //Class variables
 Digger digger;
+Map map;
+Population bars;
+
+//ArrayList declarations
 
 ArrayList<DigData> digSpot = new ArrayList<DigData>();
-Map map;
+ArrayList<Population> pop = new ArrayList<Population>();
+
 void loadData()
 {
   Table t = loadTable("data.csv", "header");
@@ -49,6 +57,13 @@ void loadData()
   {
     DigData insert = new DigData(row);
     digSpot.add(insert);
+  }
+
+  table= loadTable("birthRate.tsv", "header");
+  for (TableRow row : table.rows())
+  {
+    Population a = new Population(row);
+    pop.add(a);
   }
 }
 void printData()
@@ -67,15 +82,15 @@ void menu()
   textAlign(CENTER);
   text("Please select from the following options", width/2, 100);
   textAlign(LEFT);
-   textFont(smallerFont);
-  text("1.Dig",width/2, 130);
-   textAlign(RIGHT);
-  text("2.Craft",width/2, 160);
-   textAlign(LEFT);
+  textFont(smallerFont);
+  text("1.Dig", width/2, 130);
+  textAlign(RIGHT);
+  text("2.Population Information", width/2, 160);
+  textAlign(LEFT);
   text("3.Buy and Sell", width/2, 180);
   textAlign(RIGHT);
   text("4. LogOut", width/2, 200);
-  
+
 
   if (keyPressed && key == '1')
   {
@@ -97,43 +112,54 @@ void menu()
 
 void dig()
 {
+
+
   background(0);
   textFont(smallerFont);
   text("Dig Map", 30, 50);
 
   digger.render();
   map.display();
- 
+
+  if (keyPressed && key =='0')
+  {
+    hudState=0;
+  }
 }
 
 
 void craft()
 {
   background(0);
-  text("Crafting", 30, 50);
+  bars.drawGraph();
 }
 
 void buyAndSell()
 {
   background(0);
   text("Welcome buy and sell", 30, 50);
+
+  if (keyPressed && key =='0')
+  {
+    hudState=0;
+  }
 }
 
 void gameOver()
 {
   background(0);
-  text("gameOVER", 30, 50);
+  text("Logout", 30, 50);
   exit();
 }
 
 
-void loadScreen()
+void startScreen()
 {
-  int imageSize=150;
+
 
   if (frameCount<targetCount)
   {
-    image(logo,width/2-(imageSize/2),height*0.1,imageSize,imageSize);
+    image(logo, width/2-(imageSize/2), height*0.1, imageSize, imageSize);
     pushMatrix();
     translate(width*0.5, height *0.25);
     rotate(frameCount / 200.0);
@@ -141,11 +167,10 @@ void loadScreen()
     star(120, 100, 30, 75, 20); 
     popMatrix();
     textFont(myFont);
-  text("Welcome to the Europa Mining Colony", 30, height-50);
+    text("Welcome to the Europa Mining Colony", 30, height-50);
   } else
   {
-    switch (hudState)
-    {
+    switch(hudState) {
     case 0:
       menu();
       break;
@@ -167,7 +192,7 @@ void loadScreen()
 
 void star(float x, float y, float radius1, float radius2, int number_points) 
 {
-  fill(30,144,255);
+  fill(30, 144, 255);
   float angle = TWO_PI / number_points;
   float halfAngle = angle/2.0;
   beginShape();
@@ -185,5 +210,12 @@ void star(float x, float y, float radius1, float radius2, int number_points)
 
 void draw()
 {
-  loadScreen();
+  startScreen();
+
+  if (choice > 0)
+  {
+    DigData data = digSpot.get(choice);
+    text(" Information about this dig site"+data.State + data.SiteName+data.PrimaryOre
+      +data.SecondaryOre, width-mapBorder, 20);
+  }
 }

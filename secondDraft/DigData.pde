@@ -1,19 +1,19 @@
 class DigData
 {
-  String drilled;
-  String drillType;
-  String oreType;
-  float money;
+  String State;
+  String SiteName;
+  String PrimaryOre;
+  String SecondaryOre;
   PVector position;
   PVector mapPos;
-
+  PImage logo;
 
   DigData(TableRow row)
   {
-    drilled= row.getString("drilled");
-    drillType=row.getString("drillType");
-    oreType=row.getString("ore");
-    money = row.getFloat("money");
+    State= row.getString("State");
+    SiteName=row.getString("SiteName");
+    PrimaryOre=row.getString("PrimaryOre");
+    SecondaryOre=row.getString("SecondaryOre");
     position = new PVector(
     row.getFloat("disX")
     ,row.getFloat("disY")
@@ -26,12 +26,10 @@ class DigData
 
   String toString()
   {
-    return drilled
-      + "," + drillType
-      + "," + oreType
-      + "," + money
-      + "," +  position
-
-      ;
+    return State
+    + "," + SiteName
+    + "," + PrimaryOre
+    + "," + SecondaryOre
+    + "," +  position;
   }
 }
