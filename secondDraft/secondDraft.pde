@@ -1,7 +1,9 @@
-
+PImage logo;
 void setup()
 {
   size(640, 400);
+  //Images that will be used.
+  logo = loadImage("europa.png");
   //declaring new instances of the class
   digger = new Digger(50, 50, 0);
   map = new Map();
@@ -33,7 +35,7 @@ float mapBorder= 150;
 float border =10;
 
 int count = frameCount;
-int targetCount = 150;
+int targetCount = 300;
 
 //Class variables
 Digger digger;
@@ -62,15 +64,18 @@ void menu()
   background(0);
   stroke(255);
   textFont(myFont);
-  text("Welcome to the Europa Mining Colony", 30, 50);
-  textFont(smallerFont);
   textAlign(CENTER);
   text("Please select from the following options", width/2, 100);
   textAlign(LEFT);
-  text("1.Dig", 30, 130);
-  text("2.Craft", 30, 150);
-  text("3.Buy and Sell", 30, 170);
-  text("4. LogOut", 30, 190);
+   textFont(smallerFont);
+  text("1.Dig",width/2, 130);
+   textAlign(RIGHT);
+  text("2.Craft",width/2, 160);
+   textAlign(LEFT);
+  text("3.Buy and Sell", width/2, 180);
+  textAlign(RIGHT);
+  text("4. LogOut", width/2, 200);
+  
 
   if (keyPressed && key == '1')
   {
@@ -124,15 +129,19 @@ void gameOver()
 
 void loadScreen()
 {
+  int imageSize=150;
 
   if (frameCount<targetCount)
   {
+    image(logo,width/2-(imageSize/2),height*0.1,imageSize,imageSize);
     pushMatrix();
     translate(width*0.5, height *0.25);
     rotate(frameCount / 200.0);
     fill(50, 205, 50);
     star(120, 100, 30, 75, 20); 
     popMatrix();
+    textFont(myFont);
+  text("Welcome to the Europa Mining Colony", 30, height-50);
   } else
   {
     switch (hudState)
@@ -158,6 +167,7 @@ void loadScreen()
 
 void star(float x, float y, float radius1, float radius2, int number_points) 
 {
+  fill(30,144,255);
   float angle = TWO_PI / number_points;
   float halfAngle = angle/2.0;
   beginShape();
