@@ -19,8 +19,8 @@ class DigData
     ,row.getFloat("disY")
     );
     mapPos = new PVector(
-    map(position.x, 1, 5, mapBorder, width-mapBorder)
-    ,map(position.y, 1, 5, border, height-border)
+    map(position.x, 1, 5, mapBorder, width-mapBorder),
+    map(position.y, 1, 5, border, height-border)
     );
   }
 

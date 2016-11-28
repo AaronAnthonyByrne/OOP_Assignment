@@ -160,16 +160,20 @@ void menu()
     }
     if (mouseY>220 && mouseY<250)
     {
-      if(mouseX>10 &&mouseX<)
+      if (mouseX>5 &&mouseX<105)
+      {
+        hudState = 1;
+      }
+      if (mouseX>(width/2)-70 &&mouseX<(width/2)+70)
+      {
+        hudState = 2;
+      }
+      if (mouseX>width-110 &&mouseX<width-20)
+      {
+        hudState = 3;
+      }
+    }
   }
-
-  //hudState = 1;
-
-
-  //hudState = 2;
-
-
-  //hudState = 3;
 }
 
 void dig()
