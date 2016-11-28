@@ -24,11 +24,11 @@ class Map
       float ly = map(y, 0, 5, border, height-border);
       line(mapBorder, ly, width-mapBorder, ly);
     }
-    for (DigData spot : digSpot)
+    for (int i=0; i<digSpot.size(); i++)
     {
-
-      plotx = spot.mapPos.x;
-      ploty = spot.mapPos.y;
+      DigData m = digSpot.get(i);
+      plotx = m.mapPos.x;
+      ploty = m.mapPos.y;
 
       stroke(255, 0, 0);
       line(plotx, ploty+2, plotx, ploty-2);
@@ -40,23 +40,8 @@ class Map
       ellipse(plotx, ploty, 5, 5);
 
       fill(255);
-      textFont(digFont);
-      textAlign(LEFT, CENTER);
-      text(spot.SiteName, plotx+10, ploty-2);
-    }
-  }
-
-  void mousePressed()
-  {
-    for (int i=0; i <digSpot.size(); i++)
-    {
-      DigData spot = digSpot.get(i);
-      if (mouseX == plotx && mouseY == ploty)
-      {
-        choice = i; 
-        stroke(255, 255, 0);
-        line(spot.mapPos.x, spot.mapPos.y, mouseX, mouseY);
-      }
+      
+     
     }
   }
 }

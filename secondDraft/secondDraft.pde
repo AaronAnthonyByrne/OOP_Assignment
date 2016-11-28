@@ -40,6 +40,9 @@ int choice = -1;
 float[] years = {1, 2, 3, 4, 5, 6};
 String[] yearC ={"2034", "2035", "2036", "2037", "2038", "2039"};
 Table table;
+//
+boolean siteSelected = false;
+boolean siteUnselected = false;
 //Class variables
 Digger digger;
 Map map;
@@ -120,7 +123,45 @@ void dig()
 
   digger.render();
   map.display();
+  for (int i =0; i <digSpot.size(); i++)
+  {
+    DigData d = digSpot.get(i);
+    float x = d.mapPos.x;
+    float y = d.mapPos.y;
+    if (dist(mouseX, mouseY, x, y)<d.position.x)
+    {
+      ellipse(x, y, 10, 10);
 
+      if (mousePressed)
+      {
+        siteSelected = true;
+        siteUnselected = false;
+      } else
+      {
+        siteUnselected = true;
+      }
+    } else 
+    {
+      if (siteSelected == true)
+      {
+        if (mousePressed && siteUnselected == true)
+        {
+          siteSelected = false;
+        }
+        noStroke();
+        fill(255);
+        textSize(18);
+        text(d.SiteName, x, y );
+        fill(0, 0, 255);
+        ellipse(x, y, 10, 10);
+      } else
+      {
+        noStroke();
+        fill(255, 0, 0);
+        ellipse(x, y, 8, 8);
+      }
+    }
+  }
   if (keyPressed && key =='0')
   {
     hudState=0;
