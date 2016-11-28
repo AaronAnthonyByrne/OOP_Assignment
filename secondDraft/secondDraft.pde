@@ -25,8 +25,8 @@ void setup()
 
   //methods to call in setup
   loadData();
-  //printData();
 }
+//images used
 PImage logo;
 //Fonts for use in HUD
 PFont myFont, smallerFont, digFont;
@@ -42,13 +42,12 @@ float imageSize =150;
 float half = width/2;
 float curx;
 float cury;
-float pmin, pmax,bmin,bmax,dmin,dmax;
+float pmin, pmax, bmin, bmax, dmin, dmax;
 float lineBorder = mapBorder+(mapBorder/2);
 float sizeofMap;
 
 
 String currentSite;
-Table table;
 //
 boolean siteSelected = false;
 boolean siteUnselected = false;
@@ -82,18 +81,11 @@ void loadData()
     pdata.add(insert);
   }
 }
-void printData()
-{
-  for (DigData insert : digSpot)
-  {
-    println(insert);
-  }
-}
 
 void menu()
 {
   background(0);
-  stroke(255);
+  fill(255);
   textFont(myFont);
   textAlign(CENTER);
   text("Please select from the following options", width/2, 100);
@@ -101,7 +93,7 @@ void menu()
   textFont(smallerFont);
   text("1.Dig Site", width/2, 130);
   textAlign(RIGHT);
-  text("2.Minieral Information", width/2, 160);
+  text("2.Mineral Information", width/2, 160);
   textAlign(LEFT);
   text("3.Population", width/2, 180);
   textAlign(RIGHT);
@@ -128,8 +120,6 @@ void menu()
 
 void dig()
 {
-
-
   background(0);
   textSize(22);
   text("Dig Sites", 100, 50);
@@ -191,7 +181,6 @@ void info()
 {
   background(0);
   hud.display();
-  //bars.drawGraph();
 }
 
 void population()
@@ -199,37 +188,49 @@ void population()
   background(0);
   calcMinMax();
   pop.display();
+  stroke(255, 0, 255);
+  line(50, 125, 50, 160);
+  stroke(0, 255, 0);
+  line(50, 165, 50, 225);
+  stroke(255, 255, 0);
+  line(50, 230, 50, 265);
+  stroke(255, 0, 0);
+  line(50, 270, 50, 305);
   if (mousePressed)
   {
     if (mouseX >50 && mouseX <mapBorder)
     {
-      if (mouseY>125 && mouseY<175)
+      if (mouseY>125 && mouseY<160)
       {
         bChart = true;
         dChart=false;
         pChart=false;
         oChart=false;
       }
-      if (mouseY>175 && mouseY<250)
+      if (mouseY>165 && mouseY<225)
       {
         bChart = false;
         dChart = true;
         pChart=false;
         oChart=false;
       }
-      if (mouseY>250 && mouseY<300)
+      if (mouseY>230 && mouseY<265)
       {
         bChart = false;
         dChart = false;
         pChart = true;
         oChart=false;
       }
-      if (mouseY>300 && mouseY<350)
+      if (mouseY>270 && mouseY<305)
       {
         bChart = false;
         dChart = false;
         pChart=false;
         oChart = true;
+      }
+      if (mouseY>325 && mouseY<360)
+      {
+       hudState=0;
       }
     }
   }
@@ -248,6 +249,7 @@ void population()
   }
   if (oChart)
   {
+    pop.drawALineGraph();
   }
 }
 
@@ -313,7 +315,6 @@ void calcMinMax()
       dmin = pD.mort;
     }
   }
-  println(bmin, bmax, pmin, pmax,dmin,dmax);
 }
 
 
