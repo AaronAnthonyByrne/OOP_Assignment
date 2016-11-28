@@ -1,15 +1,15 @@
-State,SiteName,PrimaryOre,SecondaryOre,disX,disY
-Near Depletion,Site7,Olivine,Ilmenite,2,4.5
-Running,Site9,Olivine,Ilmenite,2.3,3.5
-Running,Site10,Olivine,Ilmenite,2.5,4.1
-Investigating,Site4,Pyroxene,Olivine,1.5,3.4
-Near Depletion,Site5,Pyroxene,Olivine,1.6,2.8
-Running,Site8,Olivine,Plagioclasefeldspar,2.2,2.2
-Abandoned,Site1,Pyroxene,Plagioclasefeldspar,1.1,3.9
-Investigating,Site2,Pyroxene,Plagioclasefeldspar,1.2,1.1
-Investigating,Site3,Pyroxene,Plagioclasefeldspar,1.3,1.9
-Near Depletion,Site6,Pyroxene,Plagioclasefeldspar,1.8,2.5.3
-Running,Site13,Ilmenite,Pyroxene,3.7,3.8
-Abandoned,Site14,Ilmenite,Pyroxene,4.1,4.9
-Running,Site11,Olivine,Pyroxene,3.4,1.2
-Running,Site12,Olivine,Pyroxene,3.5,3.3
+State,SiteName,PrimaryOre,SecondaryOre,disX,disY,disA,disB,disC,disD,size
+Near Depletion,Site7,Olivine,Ilmenite,2,4.5,4.1,4.5,4.5,2,10
+Running,Site9,Olivine,Ilmenite,2.3,3.5,3.7,3.5,3.5,2.3,10
+Running,Site10,Olivine,Ilmenite,2.5,4.1,3.5,4.1,4.1,2.5,10
+Investigating,Site4,Pyroxene,Olivine,1.5,3.4,3.4,3.4,3.4,1.5,10
+Near Depletion,Site5,Pyroxene,Olivine,1.6,2.8,2.5,2.8,2.8,1.6,10
+Running,Site8,Olivine,Plagioclasefeldspar,2.2,2.2,2.3,2.2,2.2,2.2,10
+Abandoned,Site1,Pyroxene,Plagioclasefeldspar,1.1,3.9,2.2,3.9,3.9,1.1,10
+Investigating,Site2,Pyroxene,Plagioclasefeldspar,1.2,1.1,2,1.1,1.1,1.2,10
+Investigating,Site3,Pyroxene,Plagioclasefeldspar,1.3,1.9,1.8,1.9,1.9,1.3,10
+Near Depletion,Site6,Pyroxene,Plagioclasefeldspar,1.8,2.5,1.6,2.5,2.5,1.8,10
+Running,Site13,Ilmenite,Pyroxene,3.7,3.8,1.5,3.8,3.8,3.7,10
+Abandoned,Site14,Ilmenite,Pyroxene,4.1,4.9,1.3,4.9,4.9,4.1,10
+Running,Site11,Olivine,Pyroxene,3.4,1.2,1.2,1.2,1.2,3.4,10
+Running,Site12,Olivine,Pyroxene,3.5,3.3,1.1,3.3,3.3,3.5,10

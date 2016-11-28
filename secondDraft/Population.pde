@@ -27,7 +27,6 @@ class Population
     popMatrix();
 
 
-
     pushMatrix();
     fill(255);
     translate(50, 250);

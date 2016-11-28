@@ -55,7 +55,9 @@ boolean bChart=false;
 boolean dChart=false;
 boolean pChart=false;
 boolean oChart=false;
-boolean exitFlag =false;
+boolean galileo =false;
+boolean minos = false;
+boolean zeus = false;
 
 //Class variables
 Map map;
@@ -183,16 +185,44 @@ void dig()
   text("Dig Sites", 100, 50);
 
   map.display();
-  for (int i =0; i <digSpot.size(); i++)
+  if (mousePressed)
+  {
+    if (mouseX >50 && mouseX <mapBorder)
+    {
+      if (mouseY>125 && mouseY<160)
+      {
+        galileo =false;
+        minos = false;
+        zeus = false;
+      }
+      if (mouseY>165 && mouseY<225)
+      {
+        galileo =false;
+        minos = true; 
+        zeus = false;
+      }
+      if (mouseY>230 && mouseY<265)
+      {
+        galileo =false;
+        minos = false;
+        zeus = true;
+      }
+      if (mouseY>325 && mouseY<360)
+      {
+        hudState=0;
+      }
+    }
+  }
+  /*for (int i =0; i <digSpot.size(); i++)
   {
     DigData d = digSpot.get(i);
-    float x = d.mapPos.x;
-    float y = d.mapPos.y;
+    float x = d.map1Pos.x;
+    float y = d.map1Pos.y;
     if (dist(mouseX, mouseY, x, y)<d.position.x)
     {
       ellipse(x, y, 10, 10);
 
-      if (mousePressed )
+      if (mousePressed)
       {
         currentSite = d.SiteName;
         curx =x +5;
@@ -227,11 +257,7 @@ void dig()
       }
     }
   }
-
-  if (keyPressed && key =='0')
-  {
-    hudState=0;
-  }
+*/
 }
 
 
