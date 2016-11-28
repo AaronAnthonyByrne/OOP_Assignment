@@ -1,12 +1,13 @@
-PImage logo;
+
 void setup()
 {
   size(640, 400);
   //Images that will be used.
   logo = loadImage("europa.png");
   //declaring new instances of the class
-  digger = new Digger(50, 50, 0);
   map = new Map();
+  hud = new HUD();
+  pop = new Population();
   //calling on specific fonts
   fill(255);
   myFont =loadFont("AgencyFB-Bold-48.vlw");
@@ -24,34 +25,47 @@ void setup()
 
   //methods to call in setup
   loadData();
-  printData();
+  //printData();
 }
+PImage logo;
 //Fonts for use in HUD
 PFont myFont, smallerFont, digFont;
 
 //variables in use
 int hudState=0;
-float mapBorder= 150;
-float border =10;
-float imageSize =150;
 int count = frameCount;
 int targetCount = 300;
-int choice = -1;
-float[] years = {1, 2, 3, 4, 5, 6};
-String[] yearC ={"2034", "2035", "2036", "2037", "2038", "2039"};
+float mapBorder= 150;
+float border =10;
+float graphBorder=20;
+float imageSize =150;
+float half = width/2;
+float curx;
+float cury;
+float pmin, pmax,bmin,bmax,dmin,dmax;
+float lineBorder = mapBorder+(mapBorder/2);
+float sizeofMap;
+
+
+String currentSite;
 Table table;
 //
 boolean siteSelected = false;
 boolean siteUnselected = false;
+boolean bChart=false;
+boolean dChart=false;
+boolean pChart=false;
+boolean oChart=false;
+
+
 //Class variables
-Digger digger;
 Map map;
-Population bars;
+Population pop;
+HUD hud;
 
 //ArrayList declarations
-
 ArrayList<DigData> digSpot = new ArrayList<DigData>();
-ArrayList<Population> pop = new ArrayList<Population>();
+ArrayList<PopData> pdata = new ArrayList<PopData>();
 
 void loadData()
 {
@@ -61,12 +75,11 @@ void loadData()
     DigData insert = new DigData(row);
     digSpot.add(insert);
   }
-
-  table= loadTable("birthRate.tsv", "header");
-  for (TableRow row : table.rows())
+  Table popTable = loadTable("birthRate.tsv", "header");
+  for (TableRow row : popTable.rows())
   {
-    Population a = new Population(row);
-    pop.add(a);
+    PopData insert = new PopData(row);
+    pdata.add(insert);
   }
 }
 void printData()
@@ -86,11 +99,11 @@ void menu()
   text("Please select from the following options", width/2, 100);
   textAlign(LEFT);
   textFont(smallerFont);
-  text("1.Dig", width/2, 130);
+  text("1.Dig Site", width/2, 130);
   textAlign(RIGHT);
-  text("2.Population Information", width/2, 160);
+  text("2.Minieral Information", width/2, 160);
   textAlign(LEFT);
-  text("3.Buy and Sell", width/2, 180);
+  text("3.Population", width/2, 180);
   textAlign(RIGHT);
   text("4. LogOut", width/2, 200);
 
@@ -118,10 +131,9 @@ void dig()
 
 
   background(0);
-  textFont(smallerFont);
-  text("Dig Map", 30, 50);
+  textSize(22);
+  text("Dig Sites", 100, 50);
 
-  digger.render();
   map.display();
   for (int i =0; i <digSpot.size(); i++)
   {
@@ -132,9 +144,13 @@ void dig()
     {
       ellipse(x, y, 10, 10);
 
-      if (mousePressed)
+      if (mousePressed )
       {
+        currentSite = d.SiteName;
+        curx =x +5;
+        cury= y+5;
         siteSelected = true;
+        delay(50);
         siteUnselected = false;
       } else
       {
@@ -148,20 +164,22 @@ void dig()
         {
           siteSelected = false;
         }
-        noStroke();
+
         fill(255);
         textSize(18);
-        text(d.SiteName, x, y );
+        text(currentSite, curx, cury);
         fill(0, 0, 255);
         ellipse(x, y, 10, 10);
       } else
       {
-        noStroke();
+
         fill(255, 0, 0);
         ellipse(x, y, 8, 8);
+        noFill();
       }
     }
   }
+
   if (keyPressed && key =='0')
   {
     hudState=0;
@@ -169,20 +187,67 @@ void dig()
 }
 
 
-void craft()
+void info()
 {
   background(0);
-  bars.drawGraph();
+  hud.display();
+  //bars.drawGraph();
 }
 
-void buyAndSell()
+void population()
 {
   background(0);
-  text("Welcome buy and sell", 30, 50);
-
-  if (keyPressed && key =='0')
+  calcMinMax();
+  pop.display();
+  if (mousePressed)
   {
-    hudState=0;
+    if (mouseX >50 && mouseX <mapBorder)
+    {
+      if (mouseY>125 && mouseY<175)
+      {
+        bChart = true;
+        dChart=false;
+        pChart=false;
+        oChart=false;
+      }
+      if (mouseY>175 && mouseY<250)
+      {
+        bChart = false;
+        dChart = true;
+        pChart=false;
+        oChart=false;
+      }
+      if (mouseY>250 && mouseY<300)
+      {
+        bChart = false;
+        dChart = false;
+        pChart = true;
+        oChart=false;
+      }
+      if (mouseY>300 && mouseY<350)
+      {
+        bChart = false;
+        dChart = false;
+        pChart=false;
+        oChart = true;
+      }
+    }
+  }
+
+  if (bChart)
+  {
+    pop.drawBLineGraph();
+  }
+  if (dChart)
+  {
+    pop.drawDLineGraph();
+  }
+  if (pChart)
+  {
+    pop.drawPLineGraph();
+  }
+  if (oChart)
+  {
   }
 }
 
@@ -191,44 +256,6 @@ void gameOver()
   background(0);
   text("Logout", 30, 50);
   exit();
-}
-
-
-void startScreen()
-{
-
-
-  if (frameCount<targetCount)
-  {
-    image(logo, width/2-(imageSize/2), height*0.1, imageSize, imageSize);
-    pushMatrix();
-    translate(width*0.5, height *0.25);
-    rotate(frameCount / 200.0);
-    fill(50, 205, 50);
-    star(120, 100, 30, 75, 20); 
-    popMatrix();
-    textFont(myFont);
-    text("Welcome to the Europa Mining Colony", 30, height-50);
-  } else
-  {
-    switch(hudState) {
-    case 0:
-      menu();
-      break;
-    case 1:
-      dig();
-      break;
-    case 2:
-      craft();
-      break;
-    case 3:
-      buyAndSell();
-      break;
-    case 4:
-      gameOver();
-      break;
-    }
-  }
 }
 
 void star(float x, float y, float radius1, float radius2, int number_points) 
@@ -248,15 +275,81 @@ void star(float x, float y, float radius1, float radius2, int number_points)
   }
   endShape(CLOSE);
 }
+void calcMinMax()
+{
+  pmin = pmax = pdata.get(0).gPop; 
+  for (PopData pD : pdata)
+  {
+    if (pD.gPop < pmin)
+    {
+      pmin = pD.gPop;
+    }
+    if (pD.gPop > pmax)
+    {
+      pmax = pD.gPop;
+    }
+  }
+  bmin = bmax = pdata.get(0).birth; 
+  for (PopData pD : pdata)
+  {
+    if (pD.birth < pmin)
+    {
+      bmax = pD.birth;
+    }
+    if (pD.birth > pmax)
+    {
+      bmin= pD.birth;
+    }
+  }
+  dmin = dmax = pdata.get(0).mort; 
+  for (PopData pD : pdata)
+  {
+    if (pD.mort < pmin)
+    {
+      dmax = pD.mort;
+    }
+    if (pD.birth > pmax)
+    {
+      dmin = pD.mort;
+    }
+  }
+  println(bmin, bmax, pmin, pmax,dmin,dmax);
+}
+
+
 
 void draw()
 {
-  startScreen();
-
-  if (choice > 0)
+  if (frameCount<targetCount)
   {
-    DigData data = digSpot.get(choice);
-    text(" Information about this dig site"+data.State + data.SiteName+data.PrimaryOre
-      +data.SecondaryOre, width-mapBorder, 20);
+    image(logo, width/2-(imageSize/2), 10, imageSize, imageSize);
+    pushMatrix();
+    translate(width*0.5, height *0.25);
+    rotate(frameCount / 200.0);
+    fill(50, 205, 50);
+    star(120, 100, 30, 75, 20); 
+    popMatrix();
+    textFont(myFont);
+    text("Welcome to the Europa Mining Colony", 30, height-30);
+  } else
+  {
+
+    switch(hudState) {
+    case 0:
+      menu();
+      break;
+    case 1:
+      dig();
+      break;
+    case 2:
+      info();
+      break;
+    case 3:
+      population();
+      break;
+    case 4:
+      gameOver();
+      break;
+    }
   }
 }

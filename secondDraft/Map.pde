@@ -4,14 +4,18 @@ class Map
   float sizeY=height-(border*2);
   PImage map;
   float plotx,ploty;
+  
   Map() 
   {
   } 
 
   void display() 
   {
-
+    sizeofMap = width - (mapBorder*2);
+    
+    
     map = loadImage("moonSurface1.jpg");
+    image(logo, (sizeofMap+mapBorder)+mapBorder/4,(height*0.1)-(border/2), imageSize/2, imageSize/2);
     fill(255);
     image(map, mapBorder, border, sizeX, sizeY);
     for (float x = 0; x<=5; x++)
