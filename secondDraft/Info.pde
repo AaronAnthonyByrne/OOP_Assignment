@@ -99,5 +99,22 @@ class Info
         hudState=0;
       }
     }
+
+    if (plagFlag)
+    {
+      rock.plagDisplay();
+    }
+    if (pyroFlag)
+    {
+      rock.pyroDisplay();
+    }
+    if (olivFlag)
+    {
+      rock.olivDisplay();
+    }
+    if (ilmeFlag)
+    {
+      rock.ilmeDisplay();
+    }
   }
 }
