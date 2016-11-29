@@ -14,7 +14,7 @@ class HUD
     oliv = loadImage("oliv.jpg");
     ilme = loadImage("ilme.jpg");
 
-    drawRect();
+    text("Main Menu", 0, 0);
     pushMatrix();
     fill(0, 255, 0);
     translate(border, 125);

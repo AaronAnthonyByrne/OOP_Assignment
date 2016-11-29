@@ -17,7 +17,7 @@ class Map
     map1 = loadImage("moonSurface1.jpg");
     map2 = loadImage("moonSurface2.jpg");
     map3 = loadImage("moonSurface3.jpg");
-    
+
     //menu buttons
     pushMatrix();
     fill(255);
@@ -52,13 +52,13 @@ class Map
     popMatrix();
 
     sizeofMap = width - (mapBorder*2);
-    if (galileo)
+    if (galileo == true && minos == false && zeus == false )
     {
       //map 1
 
 
       fill(255);
-     // image(map1, mapBorder, border, sizeX, sizeY);
+      image(map1, mapBorder, border, sizeX, sizeY);
       for (int i=0; i<digSpot.size(); i++)
       {
         DigData m = digSpot.get(i);
@@ -77,10 +77,10 @@ class Map
         fill(255);
       }
     }
-    if (minos)
+    if (galileo == false && minos == true && zeus == false )
     {
       fill(255);
-      //image(map2, mapBorder, border, sizeX, sizeY);
+      image(map2, mapBorder, border, sizeX, sizeY);
       for (int i=0; i<digSpot.size(); i++)
       {
         DigData m = digSpot.get(i);
@@ -99,12 +99,12 @@ class Map
         fill(255);
       }
     }
-    if (zeus)
+    if (galileo == false && minos == false && zeus == true )
     {
 
 
       fill(255);
-      //image(map3, mapBorder, border, sizeX, sizeY);
+      image(map3, mapBorder, border, sizeX, sizeY);
       for (int i=0; i<digSpot.size(); i++)
       {
         DigData m = digSpot.get(i);
@@ -121,6 +121,35 @@ class Map
         ellipse(plotx, ploty, 5, 5);
 
         fill(255);
+      }
+    }
+
+    if (mousePressed)
+    {
+      if (mouseX >50 && mouseX <mapBorder)
+      {
+        if (mouseY>125 && mouseY<165)
+        {
+          galileo =true;
+          minos = false;
+          zeus = false;
+        }
+        if (mouseY>170 && mouseY<225)
+        {
+          galileo =false;
+          minos = true; 
+          zeus = false;
+        }
+        if (mouseY>220 && mouseY<265)
+        {
+          galileo =false;
+          minos = false;
+          zeus = true;
+        }
+        if (mouseY>325 && mouseY<360)
+        {
+          hudState=0;
+        }
       }
     }
   }

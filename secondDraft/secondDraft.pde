@@ -178,41 +178,22 @@ void menu()
   }
 }
 
+/////
+//Meun option for Dig Sites
 void dig()
 {
   background(0);
   textSize(22);
   text("Dig Sites", 100, 50);
 
+  //call the display from the map class.
   map.display();
-  if (mousePressed)
-  {
-    if (mouseX >50 && mouseX <mapBorder)
-    {
-      if (mouseY>125 && mouseY<160)
-      {
-        galileo =false;
-        minos = false;
-        zeus = false;
-      }
-      if (mouseY>165 && mouseY<225)
-      {
-        galileo =false;
-        minos = true; 
-        zeus = false;
-      }
-      if (mouseY>230 && mouseY<265)
-      {
-        galileo =false;
-        minos = false;
-        zeus = true;
-      }
-      if (mouseY>325 && mouseY<360)
-      {
-        hudState=0;
-      }
-    }
-  }
+  //checking for user interaction
+  line(50,125,50,160);
+  line(50,170,50,215);
+  line(50,220,50,265);
+  
+  
   /*for (int i =0; i <digSpot.size(); i++)
   {
     DigData d = digSpot.get(i);
