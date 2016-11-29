@@ -1,6 +1,8 @@
 # OOP_Assignment
 This is the second year project for Object Orientated Programming using Processing for DT228
 
+My video is here [![Video](http://img.youtube.com/vi/t6xtGr71CgI/0.jpg)](https://www.youtube.com/watch?v=t6xtGr71CgI)
+
 The concept for my OOP assignment was based on a Mining Colony on one of Jupiters Moons Europa.
 
 My assignment contains one main method and six other classes which do various function throughtout the sketch.
