@@ -45,9 +45,5 @@ class HUD
     image(ilme, 0, 0, imageX, imageX);
     popMatrix();
   }
-  void drawRect()
-  {
-    fill(255);
-    rect(border, border*2, mapBorder-10, 100 );
-  }
+  
 }

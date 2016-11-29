@@ -57,7 +57,6 @@ class Population
     fill(255);
     translate(60, 360);
     text("Main Menu", 0, 0);
-
     popMatrix();
   }
 

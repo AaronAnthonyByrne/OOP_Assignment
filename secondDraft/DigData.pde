@@ -29,7 +29,8 @@ class DigData
     row.getFloat("disA")
     ,row.getFloat("disB")
     );
-    map2Pos = new PVector(
+    //tried to map more than one set of data into dig sites
+   /* map2Pos = new PVector(
     map(position.x, 1, 5, mapBorder, width-mapBorder),
     map(position.y, 1, 5, border, height-border)
     );
@@ -40,7 +41,7 @@ class DigData
     map3Pos = new PVector(
     map(position.x, 1, 5, mapBorder, width-mapBorder),
     map(position.y, 1, 5, border, height-border)
-    );
+    );*/
     size=row.getFloat("size");
   }
 

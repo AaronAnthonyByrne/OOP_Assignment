@@ -184,61 +184,14 @@ void dig()
 {
   background(0);
   textSize(22);
-  text("Dig Sites", 100, 50);
+  fill(30, 144, 255);
+  text("Dig Sites", 50, 50);
 
   //call the display from the map class.
-  map.display();
-  //checking for user interaction
-  line(50,125,50,160);
-  line(50,170,50,215);
-  line(50,220,50,265);
+  map.display(); 
+  map.printDigLocations();
+
   
-  
-  /*for (int i =0; i <digSpot.size(); i++)
-  {
-    DigData d = digSpot.get(i);
-    float x = d.map1Pos.x;
-    float y = d.map1Pos.y;
-    if (dist(mouseX, mouseY, x, y)<d.position.x)
-    {
-      ellipse(x, y, 10, 10);
-
-      if (mousePressed)
-      {
-        currentSite = d.SiteName;
-        curx =x +5;
-        cury= y+5;
-        siteSelected = true;
-        delay(50);
-        siteUnselected = false;
-      } else
-      {
-        siteUnselected = true;
-      }
-    } else 
-    {
-      if (siteSelected == true)
-      {
-        if (mousePressed && siteUnselected == true)
-        {
-          siteSelected = false;
-        }
-
-        fill(255);
-        textSize(18);
-        text(currentSite, curx, cury);
-        fill(0, 0, 255);
-        ellipse(x, y, 10, 10);
-      } else
-      {
-
-        fill(255, 0, 0);
-        ellipse(x, y, 8, 8);
-        noFill();
-      }
-    }
-  }
-*/
 }
 
 
