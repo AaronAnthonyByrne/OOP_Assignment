@@ -11,7 +11,7 @@ it involves trignomitry. It takes 5 parameters, first two are its x and y co-ord
 the fourth is the second radius or the outside circle where the points reach. The fifth and final paramter is the number of points on the star.
 I used this to work out the angle of the points(triangle). The text is just a simple text added to the co-ordinates.
 
-
+![load](/screenshots/load.png?raw=true "load")
 
 After the load screen the user will be displayed a menu screen with the logo and four options.
 the four options are "Dig Sites", "Mineral Information","Population" and "Logout". The menu buttons where achieved
@@ -32,6 +32,8 @@ It is also within this class where I was able to change the colour of the ellips
 and local variables.
 There is also extra information on the csv file (disA,disB,disC,disD) which I wanted to use for more "Dig Sites" unfortuntley I didn't get that part to work.
 The "Main Menu" button works the same as the buttons on the menu page.
+
+![Dig](/screenshots/rock.png?raw=true "Dig")
 
 When the user clicks "Mineral Information" it displays a screen with the logo in the top right, main menu button in the top left
 and also four images of four rock types. When the user hovers over a rock information about the rock will be displayed in the moddle
