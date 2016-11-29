@@ -109,7 +109,7 @@ class Map
           noStroke();
           fill(255);
           text("Name: \n"+currentSite,490,160);
-          text("Status: \n"+curState,490,200);
+          text("Status: \n"+curState,490,220);
           text("Primary Ore: \n"+curPO,490,280);
           text("Secondary Ore: \n"+curSO,490,350);
           fill(0, 0, 255);

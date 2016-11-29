@@ -28,6 +28,7 @@ class Info
     pushMatrix();
     fill(255);
     translate(70, 50);
+    textSize(22);
     text("Main Menu", 0, 0);
     popMatrix();
 
@@ -75,7 +76,11 @@ class Info
         if (plagFlag)
         {
           fill(255);
+          textSize(22);
           text(plagInfo, mapBorder, mapBorder, 300, 300);
+          textAlign(CENTER);
+          textSize(32);
+          text("PLAGIOCLASE",width/2-20,150);
         } 
         else
         {
@@ -90,7 +95,11 @@ class Info
       if (pyroFlag)
       {
         fill(255);
+        textSize(22);
         text(pyroInfo, mapBorder, mapBorder, 300, 300);
+        textAlign(CENTER);
+          textSize(32);
+          text("PYROXENE",width/2-20,150);
       } 
       else
       {
@@ -106,7 +115,11 @@ class Info
         if (olivFlag)
         {
           fill(255);
+          textSize(22);
           text(olivInfo, mapBorder, mapBorder-10, 305, 300);
+          textAlign(CENTER);
+          textSize(32);
+          text("OLIVINE",width/2-20,140);
         } 
         else
         {
@@ -119,8 +132,11 @@ class Info
         if (ilmeFlag)
         {
           fill(255);
+          textSize(22);
           text(ilmeInfo, mapBorder, mapBorder, 300, 300);
-          text()
+          textAlign(CENTER);
+          textSize(32);
+          text("ILMENITE",width/2-20,150);
         } 
         else
         {
