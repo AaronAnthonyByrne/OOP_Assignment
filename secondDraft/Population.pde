@@ -26,7 +26,6 @@ class Population
     text("Death Rate", 0, 0);
     popMatrix();
 
-
     pushMatrix();
     fill(255);
     translate(50, 250);
@@ -37,7 +36,6 @@ class Population
     fill(255);
     translate(50, 300);
     text("All Data", 0, 0);
-
     popMatrix();
 
     pushMatrix();
@@ -53,7 +51,7 @@ class Population
     rect(0,0,100,50);
     popMatrix();
     
-     pushMatrix();
+    pushMatrix();
     fill(255);
     translate(60, 360);
     text("Main Menu", 0, 0);
