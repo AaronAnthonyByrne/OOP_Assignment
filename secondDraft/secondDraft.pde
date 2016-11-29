@@ -6,8 +6,11 @@ void setup()
   logo = loadImage("europa.png");
   //declaring new instances of the class
   map = new Map();
-  hud = new HUD();
+  info = new Info();
   pop = new Population();
+  calc = new Calc();
+  load = new LoadScreen();
+  menu = new Menu();
   //calling on specific fonts
   fill(255);
   myFont =loadFont("AgencyFB-Bold-48.vlw");
@@ -66,8 +69,10 @@ boolean ilmeFlag = false;
 //Class variables
 Map map;
 Population pop;
-HUD hud;
-
+Info info;
+Calc calc;
+LoadScreen load;
+Menu menu;
 //ArrayList declarations
 ArrayList<DigData> digSpot = new ArrayList<DigData>();
 ArrayList<PopData> pdata = new ArrayList<PopData>();
@@ -86,105 +91,6 @@ void loadData()
   {
     PopData insert = new PopData(row);
     pdata.add(insert);
-  }
-}
-
-//Main menu to select options from
-void menu()
-{
-  background(0);
-
-  image(logo, width/2-(imageSize/2), 10, imageSize, imageSize);
-  
-  //using pop and push matrix to move things around the screen
-  pushMatrix();
-  fill(255);
-  translate(width/2, 200);
-  textFont(myFont);
-  textAlign(CENTER);
-  text("Please select from the following options", 0, 0);
-  popMatrix();
-
-  pushMatrix();
-  noStroke();
-  fill(30, 144, 255);
-  translate(5, 220);
-  rect(0, 0, 100, 45);
-  popMatrix();
-
-  pushMatrix();
-  fill(255);
-  translate(55, 250);
-  textFont(smallerFont);
-  text("Dig Site", 0, 0);
-  popMatrix();
-
-  pushMatrix();
-  noStroke();
-  fill(30, 144, 255);
-  translate((width/2)-70, 220);
-  rect(0, 0, 140, 45);
-  popMatrix();
-
-  pushMatrix();
-  fill(255);
-  translate(width/2, 250);
-  text("Mineral Information", 0, 0);
-  popMatrix();
-
-  pushMatrix();
-  noStroke();
-  fill(30, 144, 255);
-  translate(width-110, 220);
-  rect(0, 0, 100, 45);
-  popMatrix();
-
-  pushMatrix();
-  fill(255);
-  translate((width-60), 250);
-  text("Population", 0, 0);
-  popMatrix();
-
-  pushMatrix();
-  noStroke();
-  fill(30, 144, 255);
-  translate(width/2-50, 325);
-  rect(0, 0, 100, 50);
-  popMatrix();
-
-  pushMatrix();
-  fill(255);
-  translate(width/2, 360);
-  text("Exit", 0, 0);
-  popMatrix();
-
-//checking for user interactions, mouse clicked?
-  if (mousePressed)
-  {
-    if (mouseX > (width/2)-50 && mouseX <(width/2)+50)
-    {
-      if (mouseY>325 && mouseY<360)
-      {
-        hudState = 4;
-        //used to help end the exitScreen
-        count = frameCount +targetCount;
-      }
-    }
-    if (mouseY>220 && mouseY<250)
-    {
-      if (mouseX>5 &&mouseX<105)
-      {
-        hudState = 1;
-      }
-      if (mouseX>(width/2)-70 &&mouseX<(width/2)+70)
-      {
-        hudState = 2;
-      }
-      if (mouseX>width-110 &&mouseX<width-20)
-      {
-        hudState = 3;
-      }
-    }
   }
 }
 
@@ -207,204 +113,43 @@ void dig()
 void info()
 {
   background(0);
-  //display the 
-  hud.display();
+  //display the information about the mineral screen
+  info.display();
 }
 
 void population()
 {
   background(0);
-  calcMinMax();
+  //calculating the max and min for use in line graphs
+  calc.calcMinMax();
+  //display the menu options in Population and Graphs
   pop.display();
-  stroke(255, 0, 255);
-  line(50, 125, 50, 160);
-  stroke(0, 255, 0);
-  line(50, 165, 50, 225);
-  stroke(255, 255, 0);
-  line(50, 230, 50, 265);
-  stroke(255, 0, 0);
-  line(50, 270, 50, 305);
-  if (mousePressed)
-  {
-    if (mouseX >50 && mouseX <mapBorder)
-    {
-      if (mouseY>125 && mouseY<160)
-      {
-        bChart = true;
-        dChart=false;
-        pChart=false;
-        oChart=false;
-      }
-      if (mouseY>165 && mouseY<225)
-      {
-        bChart = false;
-        dChart = true;
-        pChart=false;
-        oChart=false;
-      }
-      if (mouseY>230 && mouseY<265)
-      {
-        bChart = false;
-        dChart = false;
-        pChart = true;
-        oChart=false;
-      }
-      if (mouseY>270 && mouseY<305)
-      {
-        bChart = false;
-        dChart = false;
-        pChart=false;
-        oChart = true;
-      }
-      if (mouseY>325 && mouseY<360)
-      {
-        hudState=0;
-      }
-    }
-  }
-
-  if (bChart)
-  {
-    pop.drawBLineGraph();
-  }
-  if (dChart)
-  {
-    pop.drawDLineGraph();
-  }
-  if (pChart)
-  {
-    pop.drawPLineGraph();
-  }
-  if (oChart)
-  {
-    pop.drawALineGraph();
-  }
 }
-
+  
 void gameOver()
 {
   background(0);
+  //Logout Splash Screen
   if (frameCount<count)
   {
-    exitScreen();
+    load.exitScreen();
   } else
   {
     exit();
   }
 }
 
-void star(float x, float y, float radius1, float radius2, int number_points) 
-{
-  fill(30, 144, 255);
-  float angle = TWO_PI / number_points;
-  float halfAngle = angle/2.0;
-  beginShape();
-  for (float a = 0; a < TWO_PI; a += angle) 
-  {
-    float sx = x + cos(a) * radius2;
-    float sy = y + sin(a) * radius2;
-    vertex(sx, sy);
-    sx = x + cos(a+halfAngle) * radius1;
-    sy = y + sin(a+halfAngle) * radius1;
-    vertex(sx, sy);
-  }
-  endShape(CLOSE);
-}
-void star2(float x, float y, float radius1, float radius2, int number_points) 
-{
-  fill(30, 144, 255);
-  float angle = PI / number_points;
-  float halfAngle = angle/2.0;
-  beginShape();
-  for (float a = 0; a < TWO_PI; a += angle) 
-  {
-    float sx = x + cos(a) * radius2;
-    float sy = y + sin(a) * radius2;
-    vertex(sx, sy);
-    sx = x + cos(a+halfAngle) * radius1;
-    sy = y + sin(a+halfAngle) * radius1;
-    vertex(sx, sy);
-  }
-  endShape(CLOSE);
-}
-void calcMinMax()
-{
-  pmin = pmax = pdata.get(0).gPop; 
-  for (PopData pD : pdata)
-  {
-    if (pD.gPop < pmin)
-    {
-      pmin = pD.gPop;
-    }
-    if (pD.gPop > pmax)
-    {
-      pmax = pD.gPop;
-    }
-  }
-  bmin = bmax = pdata.get(0).birth; 
-  for (PopData pD : pdata)
-  {
-    if (pD.birth < pmin)
-    {
-      bmax = pD.birth;
-    }
-    if (pD.birth > pmax)
-    {
-      bmin= pD.birth;
-    }
-  }
-  dmin = dmax = pdata.get(0).mort; 
-  for (PopData pD : pdata)
-  {
-    if (pD.mort < pmin)
-    {
-      dmax = pD.mort;
-    }
-    if (pD.birth > pmax)
-    {
-      dmin = pD.mort;
-    }
-  }
-}
-
-void loadScreen()
-{
-  image(logo, width/2-(imageSize/2), 10, imageSize, imageSize);
-  pushMatrix();
-  translate(width*0.5, height *0.25);
-  rotate(frameCount / 200.0);
-  fill(50, 205, 50);
-  star2(120, 100, 30, 75, 20); 
-  popMatrix();
-  textFont(myFont);
-  text("Welcome to the Europa Mining Colony", 30, height-30);
-}
-
-void exitScreen()
-{
-  image(logo, width/2-(imageSize/2), 10, imageSize, imageSize);
-  pushMatrix();
-  translate(width*0.5, height *0.25);
-  rotate(frameCount / 200.0);
-  fill(50, 205, 50);
-  star(120, 100, 30, 75, 20); 
-  popMatrix();
-  textFont(myFont);
-  text("Goodbye from the Europa Mining Colony", 20, height-30);
-}
-
-
 void draw()
 {
   if (frameCount<targetCount)
   {
-    loadScreen();
+    load.display();
   } else
   {
 
     switch(hudState) {
     case 0:
-      menu();
+      menu.display();
       break;
     case 1:
       dig();

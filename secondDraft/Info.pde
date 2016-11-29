@@ -1,9 +1,9 @@
-class HUD
+class Info
 {
   PImage plag, pyro, oliv, ilme;
   float imageX= imageSize*.75;
 
-  HUD()
+  Info()
   {
   }
 
