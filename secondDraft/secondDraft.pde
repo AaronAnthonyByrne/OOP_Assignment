@@ -10,7 +10,7 @@
   calc = new Calc();
   load = new LoadScreen();
   menu = new Menu();
-  rock = new Rock();
+  
   //calling on specific fonts
   fill(255);
   myFont =loadFont("AgencyFB-Bold-48.vlw");
@@ -73,7 +73,7 @@ Info info;
 Calc calc;
 LoadScreen load;
 Menu menu;
-Rock rock;
+
 //ArrayList declarations
 ArrayList<DigData> digSpot = new ArrayList<DigData>();
 ArrayList<PopData> pdata = new ArrayList<PopData>();
