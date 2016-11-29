@@ -18,7 +18,7 @@ the four options are "Dig Sites", "Mineral Information","Population" and "Logout
 by using the pushMatrix and popMatrix functions. First a blue rectangle was traslated into position then the text was translated over the box.
 To check which button was clicked a mousePressed fuction was called and if statements to check if the mouse was within the boxes x and y co-ordinates.
 
-![Menu](/screenshots/menu.jpg?raw=true "Menu")
+![Menu](/screenshots/menu.png?raw=true "Menu")
 
 When the user clicks on "Dig Sites" they will be taken to the screen below. On the screen are a logo, text with the sites name and a image of a 
 Lunar surface along with plotted points. When the user hovers over a site it turns yellow and when the user clicks on a mining site text appears on the left hand side providing information about the 
