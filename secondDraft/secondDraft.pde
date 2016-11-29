@@ -48,7 +48,7 @@ float sizeofMap;
 
 
 String currentSite;
-//
+//all boolean variables used in HUD
 boolean siteSelected = false;
 boolean siteUnselected = false;
 boolean bChart=false;
@@ -58,6 +58,10 @@ boolean oChart=false;
 boolean galileo =false;
 boolean minos = false;
 boolean zeus = false;
+boolean plagFlag = false;
+boolean pyroFlag = false;
+boolean olivFlag = false;
+boolean ilmeFlag = false;
 
 //Class variables
 Map map;
@@ -68,6 +72,7 @@ HUD hud;
 ArrayList<DigData> digSpot = new ArrayList<DigData>();
 ArrayList<PopData> pdata = new ArrayList<PopData>();
 
+//Loading both data files in tables for use.
 void loadData()
 {
   Table t = loadTable("data.csv", "header");
@@ -84,11 +89,14 @@ void loadData()
   }
 }
 
+//Main menu to select options from
 void menu()
 {
   background(0);
 
   image(logo, width/2-(imageSize/2), 10, imageSize, imageSize);
+  
+  //using pop and push matrix to move things around the screen
   pushMatrix();
   fill(255);
   translate(width/2, 200);
@@ -150,6 +158,7 @@ void menu()
   text("Exit", 0, 0);
   popMatrix();
 
+//checking for user interactions, mouse clicked?
   if (mousePressed)
   {
     if (mouseX > (width/2)-50 && mouseX <(width/2)+50)
@@ -157,6 +166,7 @@ void menu()
       if (mouseY>325 && mouseY<360)
       {
         hudState = 4;
+        //used to help end the exitScreen
         count = frameCount +targetCount;
       }
     }
@@ -179,7 +189,7 @@ void menu()
 }
 
 /////
-//Meun option for Dig Sites
+//Menu option for Dig Sites
 void dig()
 {
   background(0);
@@ -189,15 +199,15 @@ void dig()
 
   //call the display from the map class.
   map.display(); 
+  //printing and selcting dig sites and displayin information
   map.printDigLocations();
-
-  
 }
 
 
 void info()
 {
   background(0);
+  //display the 
   hud.display();
 }
 

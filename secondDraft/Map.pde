@@ -61,8 +61,7 @@ class Map
 
     if (mousePressed)
     {
-      if (mouseY>325 && mouseY<360 && mouseX >border && mouseX<mapBorder-40)
-      
+      if (mouseY>325 && mouseY<360)
       {
         hudState=0;
       }
@@ -110,7 +109,7 @@ class Map
           noStroke();
           fill(255);
           text("Name: \n"+currentSite,490,160);
-          text("Status: \n"+curState,490,220);
+          text("Status: \n"+curState,490,2);
           text("Primary Ore: \n"+curPO,490,280);
           text("Secondary Ore: \n"+curSO,490,350);
           fill(0, 0, 255);
