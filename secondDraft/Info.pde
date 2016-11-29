@@ -61,32 +61,37 @@ class Info
     {
       if (mouseX> border && mouseX < border+imageX)
       {
-        if (mouseY>125 && mouseY<125+imageX)
+        if (mouseY>200 && mouseY<350)
         {
+          println("plag");
           plagFlag = true;
           pyroFlag = false;
           olivFlag = false;
           ilmeFlag = false;
         }
-        if (mouseY>125+250 && mouseY<125+250+imageX)
+        if (mouseY>200 && mouseY<350)
         {
+          println("pyro");
           plagFlag = false;
           pyroFlag = true;
           olivFlag = false;
           ilmeFlag = false;
         }
       }
-      if (mouseX> width-(mapBorder+border) && mouseX < width-(mapBorder+border)+imageX)
+      if (mouseX> 450  && mouseX < 600)
       {
-        if (mouseY>125 && mouseY<125+imageX)
+        println("inside 2 X");
+        if (mouseY>100 && mouseY<180)
         {
+          println("oliv");
           plagFlag = false;
           pyroFlag = false;
           olivFlag = true;
           ilmeFlag = false;
         }
-        if (mouseY>125+250 && mouseY<125+250+imageX)
+        if (mouseY>200 && mouseY<350)
         {
+          println("ilme");
           plagFlag = false;
           pyroFlag = false;
           olivFlag = false;
@@ -98,23 +103,6 @@ class Info
       {
         hudState=0;
       }
-    }
-
-    if (plagFlag)
-    {
-      rock.plagDisplay();
-    }
-    if (pyroFlag)
-    {
-      rock.pyroDisplay();
-    }
-    if (olivFlag)
-    {
-      rock.olivDisplay();
-    }
-    if (ilmeFlag)
-    {
-      rock.ilmeDisplay();
     }
   }
 }
