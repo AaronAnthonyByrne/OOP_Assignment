@@ -33,7 +33,7 @@ and local variables.
 There is also extra information on the csv file (disA,disB,disC,disD) which I wanted to use for more "Dig Sites" unfortuntley I didn't get that part to work.
 The "Main Menu" button works the same as the buttons on the menu page.
 
-![Dig](/screenshots/rock.png?raw=true "Dig")
+![Map](/screenshots/map.png?raw=true "Map")
 
 When the user clicks "Mineral Information" it displays a screen with the logo in the top right, main menu button in the top left
 and also four images of four rock types. When the user hovers over a rock information about the rock will be displayed in the moddle
@@ -44,6 +44,8 @@ and a if statment checking the co-ordinates of the mouse are used. when the user
 and the coresponding information is displayed using the text function which took four parameters, first and second are the x and y co-ordinates of 
 the top left hand corner of the text, the third is the width of the text box and the fourth is the height of the text box. When the user moves off 
 the image the flag is set to false and the text disappers.
+
+![Dig](/screenshots/rock.png?raw=true "Dig")
 
 When "Population" is clicked on the main screen it taked you to the screen below. On the screen the user will see the logo in the top left, four
 words(Birth Rate, Death Rate, Population and All) with coloured lines beside them and the "Main Menu" button. When one of the options are clicked
@@ -56,6 +58,14 @@ user has clicked one the mousePressed fuction along with x and y co-ordinates ar
 true and the rest are set to false, except when all is clicked and all graphs are printed. To get the graphs to print on the screen the map function was 
 used to set the x and y locations of the line which where drawn.
 
+![graph1](/screenshots/graph1.png?raw=true "graph1")
+
+![graph2](/screenshots/graph2.png?raw=true "graph2")
+
+![graph3](/screenshots/graph3.png?raw=true "graph3")
+
+![graph4](/screenshots/graph4.png?raw=true "graph4")
+
 When the user clicks Exit a similar screen to the load screen appears and it say goodbye.
 
-And that is all.
+![Exit](/screenshots/exit.png?raw=true "exit")
