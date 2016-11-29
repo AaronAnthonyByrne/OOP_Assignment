@@ -11,10 +11,14 @@ it involves trignomitry. It takes 5 parameters, first two are its x and y co-ord
 the fourth is the second radius or the outside circle where the points reach. The fifth and final paramter is the number of points on the star.
 I used this to work out the angle of the points(triangle). The text is just a simple text added to the co-ordinates.
 
+
+
 After the load screen the user will be displayed a menu screen with the logo and four options.
 the four options are "Dig Sites", "Mineral Information","Population" and "Logout". The menu buttons where achieved
 by using the pushMatrix and popMatrix functions. First a blue rectangle was traslated into position then the text was translated over the box.
 To check which button was clicked a mousePressed fuction was called and if statements to check if the mouse was within the boxes x and y co-ordinates.
+
+![Menu](/screenshots/menu.jpg?raw=true "Menu")
 
 When the user clicks on "Dig Sites" they will be taken to the screen below. On the screen are a logo, text with the sites name and a image of a 
 Lunar surface along with plotted points. When the user hovers over a site it turns yellow and when the user clicks on a mining site text appears on the left hand side providing information about the 
